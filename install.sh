@@ -116,7 +116,8 @@ move_file_to_respective_loc(){
 
 	# Move wiregaurd sampel file
 	cp "./src/lan-t1.conf" "$wg_config" && \
-	cp "./src/wan-t1.conf" "$wg_config"
+	cp "./src/wan-t1.conf" "$wg_config" && \
+    cp "./src/direct.conf" "$wg_config"
 	showmsg i "File move to successfully"
 	sleep 2	
 }
