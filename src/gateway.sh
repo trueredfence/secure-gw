@@ -10,7 +10,7 @@ MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 export TOP_PID=$$
 
-help () {
+help () {    
   printf "============================================================================\n"
   printf "+                            Gateway Script 1.3                            +\n"
   printf "============================================================================\n"
@@ -453,31 +453,7 @@ setting_up_routing_wan_secure_tunnel(){
             showmsg s "Route for $endpoint via $gateway on $active_iface already exists"
         fi
         ((i++))  
-    done
-   #  local j
-   # # num_active=${#active_interfaces[@]}   
-   #  for interface in "${wantun[@]}"; do 
-   #      j=0
-   #      if [[ ! -n ${num_active[$j]} ]]; then
-   #          j=0
-   #          active_iface=${active_interfaces[$j]}
-   #          echo "$active_iface changed again"
-   #      else
-   #          active_iface=${active_interfaces[$j]}
-   #      fi   
-   #      endpoint=$(get_wireguard_info "$interface" "endpoint")       
-   #      gateway=$(get_nic_info "$active_iface" "gateway")      
-   #      if ! ip route show | grep -q "$endpoint via $gateway dev $active_iface"; then
-   #          # Add the route
-   #          echo "$endpoint via $gateway dev $active_iface" >> "$routefile"
-   #          ip route add "$endpoint" via "$gateway" dev "$active_iface"
-   #          showmsg s "Added route for $interface to endpoint $endpoint via $active_iface ($gateway)"
-   #      else           
-   #          showmsg s "Route for $endpoint via $gateway on $active_iface already exists"
-   #      fi
-   #      ((j++))
-   #  done
-   
+    done      
 }
 
 remove_direct_rules_fw(){
@@ -556,6 +532,8 @@ configure_public_zone(){
             firewall-cmd --permanent --add-port=$port --zone=public
         fi
      done;
+     # For public zone to allow ping from client side
+     firewall-cmd --permanent --add-protocol=icmp --zone=public
      firewall-cmd --permanent --add-masquerade --zone=public
      firewall-cmd --reload
 }
