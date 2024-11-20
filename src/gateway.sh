@@ -21,6 +21,7 @@ help () {
   printf "|    3): To stop Gateway                                                   |\n"
   printf "|    4): To reset Gateway                                                  |\n"
   printf "|    5): To debug Gateway                                                  |\n"
+  printf "|    6): To update Gateway                                                 |\n"
   printf "|    0): To exit from Gateway script                                       |\n"
   printf "============================================================================\n"
   printf "|               Thank you for using! Remember me for this work ;)          |\n"
@@ -110,6 +111,25 @@ showmsg() {
             ;;
     esac
 }
+
+update_and_clean() {
+    gw_file="/usr/local/bin/gateway"
+     if [[ "$0" != *.sh ]]; then  
+        showmsg e "You can't use this command here"      
+        kill $TOP_PID
+    fi 
+    if [ -f "$gw_file" ]; then
+        showmsg i "updating gateway ..."        
+        cat "$0" > "$gw_file"
+        
+        showmsg s "Gateway updated successfully."
+        
+        rm "$0"
+    else
+        showmsg e "Gateway cmd '$gw_file' does not exist. Operation aborted."
+    fi
+}
+
 
 check_system_details(){
     showmsg i "Current routes on Gateway are:"
@@ -731,6 +751,9 @@ control_script() {
             debug_gw "Debugging"
             showmsg i "Gateway debugging is finished"
             ;;
+        "6")
+            update_and_clean
+            ;;    
         *)
             showmsg e "Invalid argument '$1'. Exiting script."
             kill $TOP_PID
@@ -740,12 +763,12 @@ control_script() {
 
 # Check if arguments were passed
 if [ "$#" -lt 1 ]; then 
+    help
     read -p "Your choice: " user_input
     if [ "$user_input" = "0" ]; then
         showmsg e "Exiting script..."
         exit 0
-    fi 
-    help   
+    fi        
     control_script "$user_input"
 else    
     help
