@@ -12,7 +12,7 @@ export TOP_PID=$$
 
 info () {
   printf "=======================================================================================\n"
-  printf "+                                 ${MAGENTA}Gateway Script 1.2${NC}                                  +\n"
+  printf "+                                 ${MAGENTA}Gateway Script 1.2${NC}                   +\n"
   printf "=======================================================================================\n"
   printf "| This script will install gateway configurations and requirements automactically     |\n"
   printf "| in centos9 machines                                                                 |\n"
@@ -27,7 +27,7 @@ info () {
   printf "|   1. It will create gateway command that will be accessable on terminal directly    |\n"
   printf "|   2. It will create gateway service that will run during shutdown and at startup    |\n"
   printf "|   3. It will install wiregarud dashboard that can be access on                      |\n"
-  printf "|      ${YELLOW}http://<serverip>:5000/${NC}                                                        |\n"
+  printf "|      ${YELLOW}http://<serverip>:5000/${NC}                                          |\n"
   printf "=======================================================================================\n"
 }
 
