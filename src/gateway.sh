@@ -114,7 +114,8 @@ showmsg() {
 
 update_and_clean() {
     gw_file="/usr/local/bin/gateway"
-     if [[ "$(pwd)" == "/usr/local/bin" ]]; then  
+    script_dir=$(dirname "$(realpath "$0")")
+    if [[ "$script_dir" == "/usr/local/bin" ]]; then     
         showmsg e "You can't use this command here"      
         kill $TOP_PID
     fi 
