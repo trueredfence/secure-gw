@@ -114,7 +114,7 @@ showmsg() {
 
 update_and_clean() {
     gw_file="/usr/local/bin/gateway"
-     if [[ "$0" != *.sh ]]; then  
+     if [[ "$(pwd)" == "/usr/local/bin" ]]; then  
         showmsg e "You can't use this command here"      
         kill $TOP_PID
     fi 
