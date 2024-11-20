@@ -715,8 +715,7 @@ debug_gw() {
   get_tun_status_ping_debug 
 }
 # Controller script
-control_script() {
-    help
+control_script() {    
     case "$1" in
         "1" | "2")   
             local user_input
@@ -751,14 +750,15 @@ control_script() {
 }
 
 # Check if arguments were passed
-if [ "$#" -lt 1 ]; then    
-    help
+if [ "$#" -lt 1 ]; then 
     read -p "Your choice: " user_input
     if [ "$user_input" = "0" ]; then
         showmsg e "Exiting script..."
         exit 0
-    fi    
+    fi 
+    help   
     control_script "$user_input"
 else    
+    help
     control_script "$1"
 fi
