@@ -265,18 +265,7 @@ add_default_route(){
            ip route add $line           
         done < "$routefile"
     fi  
-    > "$routefile"
-    # local i=0
-    # for iface in "${wan_interface[@]}"; do      
-    #     gateway=$(get_nic_info "$iface" "gateway")
-    #     src_ip=$(ip addr show "$iface" | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
-    #     route="default via $gateway dev $iface proto static src $src_ip metric 10$i" 
-    #     if ! ip route show | grep -q "$route"; then
-    #         echo "Adding route: $route"
-    #         ip route add default via "$gateway" dev "$iface" proto static src "$src_ip" metric 10"$i" 
-    #     fi
-    #     ((i++))        
-    # done  
+    > "$routefile"   
 }
 manage_wireguard() { 
     showmsg i "Reset the wireguard interface" 
